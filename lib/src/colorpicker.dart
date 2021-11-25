@@ -695,67 +695,23 @@ class _HueRingPickerState extends State<HueRingPicker> {
   @override
   Widget build(BuildContext context) {
     if (MediaQuery.of(context).orientation == Orientation.portrait || widget.portraitOnly) {
-      return Column(
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: widget.pickerAreaBorderRadius,
-            child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: Stack(alignment: AlignmentDirectional.center, children: <Widget>[
-                SizedBox(
-                  width: widget.colorPickerHeight,
-                  height: widget.colorPickerHeight,
-                  child: ColorPickerHueRing(
-                    currentHsvColor,
-                    onColorChanging,
-                    displayThumbColor: widget.displayThumbColor,
-                    strokeWidth: widget.hueRingStrokeWidth,
-                  ),
-                ),
-                SizedBox(
-                  width: widget.colorPickerHeight / 1.6,
-                  height: widget.colorPickerHeight / 1.6,
-                  child: ColorPickerArea(currentHsvColor, onColorChanging, PaletteType.hsv),
-                )
-              ]),
-            ),
-          ),
-          if (widget.enableAlpha)
+      return ClipRRect(
+        borderRadius: widget.pickerAreaBorderRadius,
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Stack(alignment: AlignmentDirectional.center, children: <Widget>[
             SizedBox(
-              height: 40.0,
               width: widget.colorPickerHeight,
-              child: ColorPickerSlider(
-                TrackType.alpha,
+              height: widget.colorPickerHeight,
+              child: ColorPickerHueRing(
                 currentHsvColor,
                 onColorChanging,
                 displayThumbColor: widget.displayThumbColor,
+                strokeWidth: widget.hueRingStrokeWidth,
               ),
             ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15.0, 5.0, 10.0, 5.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const SizedBox(width: 10),
-                ColorIndicator(currentHsvColor),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 5, 0, 20),
-                    child: ColorPickerInput(
-                      currentHsvColor.toColor(),
-                      (Color color) {
-                        setState(() => currentHsvColor = HSVColor.fromColor(color));
-                        widget.onColorChanged(currentHsvColor.toColor());
-                      },
-                      enableAlpha: widget.enableAlpha,
-                      embeddedText: true,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+          ]),
+        ),
       );
     } else {
       return Row(
