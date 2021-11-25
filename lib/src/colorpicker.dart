@@ -660,7 +660,9 @@ class HueRingPicker extends StatefulWidget {
   }) : super(key: key);
 
   final Color pickerColor;
+
   final ValueChanged<Color> onColorChanged;
+  final ValueChanged<Color> onColorChangedFinished;
   final bool portraitOnly;
   final double colorPickerHeight;
   final double hueRingStrokeWidth;
@@ -691,6 +693,10 @@ class _HueRingPickerState extends State<HueRingPicker> {
     setState(() => currentHsvColor = color);
     widget.onColorChanged(currentHsvColor.toColor());
   }
+  void onColorChangedFinished(HSVColor color) {
+    setState(() => currentHsvColor = color);
+    widget.onColorChangedFinished(currentHsvColor.toColor());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -706,6 +712,7 @@ class _HueRingPickerState extends State<HueRingPicker> {
               child: ColorPickerHueRing(
                 currentHsvColor,
                 onColorChanging,
+                onColorChangedFinished,
                 displayThumbColor: widget.displayThumbColor,
                 strokeWidth: widget.hueRingStrokeWidth,
               ),
@@ -734,7 +741,7 @@ class _HueRingPickerState extends State<HueRingPicker> {
                 SizedBox(
                   width: widget.colorPickerHeight - widget.hueRingStrokeWidth * 2,
                   height: widget.colorPickerHeight - widget.hueRingStrokeWidth * 2,
-                  child: ColorPickerHueRing(currentHsvColor, onColorChanging, strokeWidth: widget.hueRingStrokeWidth),
+                  child: ColorPickerHueRing(currentHsvColor, onColorChanging,onColorChangingFinished, strokeWidth: widget.hueRingStrokeWidth),
                 ),
                 Column(
                   children: [
