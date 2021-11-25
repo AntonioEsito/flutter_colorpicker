@@ -651,6 +651,8 @@ class HueRingPicker extends StatefulWidget {
     Key? key,
     required this.pickerColor,
     required this.onColorChanged,
+    required this.onColorChangedFinished,
+
     this.portraitOnly = false,
     this.colorPickerHeight = 250.0,
     this.hueRingStrokeWidth = 20.0,
@@ -741,7 +743,7 @@ class _HueRingPickerState extends State<HueRingPicker> {
                 SizedBox(
                   width: widget.colorPickerHeight - widget.hueRingStrokeWidth * 2,
                   height: widget.colorPickerHeight - widget.hueRingStrokeWidth * 2,
-                  child: ColorPickerHueRing(currentHsvColor, onColorChanging,onColorChangingFinished, strokeWidth: widget.hueRingStrokeWidth),
+                  child: ColorPickerHueRing(currentHsvColor, onColorChanging,onColorChangedFinished, strokeWidth: widget.hueRingStrokeWidth),
                 ),
                 Column(
                   children: [
